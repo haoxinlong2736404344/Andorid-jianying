@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "scene": "权益页空态",
+    "owner": "ComposeFlow Camp"
+  },
+  "root": {
+    "type": "Column",
+    "style": {
+      "width": 390,
+      "height": 420,
+      "backgroundColor": "#F5F7FA",
+      "padding": { "all": 24 },
+      "horizontalAlignment": "Center",
+      "verticalAlignment": "Center"
+    },
+    "children": [
+      {
+        "type": "Image",
+        "url": "asset://empty_benefits.png",
+        "description": "暂无权益插图",
+        "style": {
+          "width": 120,
+          "height": 120,
+          "backgroundColor": "#E9EDF2",
+          "cornerRadius": 60,
+          "margin": { "bottom": 16 }
+        }
+      },
+      {
+        "type": "Text",
+        "text": "暂无可领取权益",
+        "visible": "{ benefits.count == 0 }",
+        "style": {
+          "textColor": "#111111",
+          "fontSize": 20,
+          "margin": { "bottom": 8 }
+        }
+      },
+      {
+        "type": "Text",
+        "text": "后续活动上线后会自动出现在这里",
+        "style": {
+          "textColor": "#666666",
+          "fontSize": 14,
+          "margin": { "bottom": 20 }
+        }
+      },
+      {
+        "type": "Button",
+        "text": "刷新权益",
+        "style": {
+          "width": 180,
+          "height": 44,
+          "backgroundColor": "#2A6FDB",
+          "textColor": "#FFFFFF",
+          "cornerRadius": 22
+        },
+        "action": {
+          "type": "Toast",
+          "payload": {
+            "message": "正在刷新"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "scene": "权益列表",
+    "owner": "ComposeFlow Camp"
+  },
+  "root": {
+    "type": "StateLayout",
+    "state": "{ benefits.state }",
+    "style": {
+      "width": 390,
+      "backgroundColor": "#F5F7FA",
+      "padding": { "all": 16 }
+    },
+    "loading": [
+      {
+        "type": "Text",
+        "text": "权益加载中..."
+      }
+    ],
+    "empty": [
+      {
+        "type": "Text",
+        "text": "暂无可领取权益"
+      }
+    ],
+    "error": [
+      {
+        "type": "Text",
+        "text": "权益加载失败，请稍后重试"
+      }
+    ],
+    "content": [
+      {
+        "type": "Text",
+        "text": "{ user.name } 的会员权益",
+        "style": {
+          "fontSize": 22,
+          "textColor": "#111111",
+          "margin": { "bottom": 12 }
+        }
+      },
+      {
+        "type": "ForEach",
+        "items": "benefits.items",
+        "itemName": "benefit",
+        "children": [
+          {
+            "type": "Row",
+            "style": {
+              "height": 56,
+              "backgroundColor": "#FFFFFFFF",
+              "cornerRadius": 12,
+              "padding": { "horizontal": 14, "vertical": 8 },
+              "margin": { "bottom": 10 },
+              "verticalAlignment": "Center"
+            },
+            "styleWhen": [
+              {
+                "when": "{ benefit.status == 'used' }",
+                "style": {
+                  "backgroundColor": "#FFECECEC"
+                }
+              }
+            ],
+            "children": [
+              {
+                "type": "Text",
+                "text": "{ benefit.title }",
+                "style": {
+                  "textColor": "#111111",
+                  "fontSize": 16,
+                  "width": 190
+                }
+              },
+              {
+                "type": "Text",
+                "text": "{ benefit.tag }",
+                "style": {
+                  "textColor": "#2A6FDB",
+                  "fontSize": 13
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

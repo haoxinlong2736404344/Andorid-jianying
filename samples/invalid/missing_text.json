@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "root": {
+    "type": "Text",
+    "style": {
+      "textColor": "#111111"
+    }
+  }
+}

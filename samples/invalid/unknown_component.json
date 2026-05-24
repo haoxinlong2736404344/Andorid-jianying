@@ -1,0 +1,7 @@
+{
+  "version": "1.0",
+  "root": {
+    "type": "Video",
+    "url": "https://example.com/demo.mp4"
+  }
+}

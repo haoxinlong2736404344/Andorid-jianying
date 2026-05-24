@@ -1,0 +1,104 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "scene": "订阅页",
+    "owner": "ComposeFlow Camp"
+  },
+  "root": {
+    "type": "Column",
+    "style": {
+      "width": 390,
+      "backgroundColor": "#FFF9F0",
+      "padding": { "all": 16 }
+    },
+    "children": [
+      {
+        "type": "Text",
+        "text": "{ campaign.title }",
+        "style": {
+          "textColor": "#181818",
+          "fontSize": 26,
+          "margin": { "bottom": 8 }
+        }
+      },
+      {
+        "type": "Text",
+        "text": "开通会员，解锁高阶剪辑能力",
+        "style": {
+          "textColor": "#666666",
+          "fontSize": 14,
+          "margin": { "bottom": 16 }
+        }
+      },
+      {
+        "type": "Row",
+        "style": {
+          "margin": { "bottom": 16 }
+        },
+        "children": [
+          {
+            "type": "Box",
+            "style": {
+              "width": 170,
+              "height": 116,
+              "backgroundColor": "#FFFFFF",
+              "cornerRadius": 14,
+              "padding": { "all": 12 },
+              "margin": { "end": 12 }
+            },
+            "children": [
+              {
+                "type": "Text",
+                "text": "月度会员"
+              },
+              {
+                "type": "Text",
+                "text": "灵活体验"
+              }
+            ]
+          },
+          {
+            "type": "Box",
+            "style": {
+              "width": 170,
+              "height": 116,
+              "backgroundColor": "#111111",
+              "cornerRadius": 14,
+              "padding": { "all": 12 }
+            },
+            "children": [
+              {
+                "type": "Text",
+                "text": "年度会员",
+                "style": { "textColor": "#FFFFFF" }
+              },
+              {
+                "type": "Text",
+                "text": "立省 { campaign.discount }",
+                "style": { "textColor": "#FFD37A" }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Button",
+        "text": "继续开通",
+        "style": {
+          "width": 358,
+          "height": 50,
+          "backgroundColor": "#111111",
+          "textColor": "#FFFFFF",
+          "cornerRadius": 25,
+          "fontSize": 16
+        },
+        "action": {
+          "type": "Navigate",
+          "payload": {
+            "route": "checkout"
+          }
+        }
+      }
+    ]
+  }
+}
