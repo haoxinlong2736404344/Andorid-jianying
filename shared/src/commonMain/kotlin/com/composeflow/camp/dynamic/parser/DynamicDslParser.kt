@@ -93,6 +93,13 @@ class DynamicDslParser(
                 styleWhen = styleWhen,
                 children = parseChildren(obj, path, errors),
             )
+            "HScroll" -> DynamicNode.HScroll(
+                id = id,
+                visible = visible,
+                style = style,
+                styleWhen = styleWhen,
+                children = parseChildren(obj, path, errors),
+            )
             "Text" -> {
                 val text = obj.string("text")
                 if (text == null) {

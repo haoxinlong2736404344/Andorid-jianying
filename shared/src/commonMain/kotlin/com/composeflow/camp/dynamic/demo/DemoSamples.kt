@@ -146,11 +146,10 @@ object DemoSamples {
                     ]
                   },
                   {
-                    "type": "Row",
+                    "type": "HScroll",
                     "style": {
                       "width": 318,
-                      "margin": { "bottom": 16 },
-                      "horizontalAlignment": "Center"
+                      "margin": { "bottom": 16 }
                     },
                     "children": [
                       {

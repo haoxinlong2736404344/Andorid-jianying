@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -91,6 +93,20 @@ fun DynamicNodeRenderer(
         ) {
             node.children.forEach {
                 DynamicNodeRenderer(it, data, eventDispatcher, resolver)
+            }
+        }
+
+        is DynamicNode.HScroll -> {
+            // Note: we render children as individual items. For most use-cases, HScroll will contain
+            // a single ForEach which will expand into multiple nodes via DynamicNodeRenderer.
+            LazyRow(
+                modifier = modifier.applyStyle(style),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                items(node.children) { child ->
+                    DynamicNodeRenderer(child, data, eventDispatcher, resolver)
+                }
             }
         }
 
