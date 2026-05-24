@@ -20,6 +20,7 @@ class BindingResolver {
      *   with PatternSyntaxException during Pattern compilation.
      */
     private val bindingPattern: Regex = runCatching {
+        // Strictly match { ... } bindings, and DO NOT match "[ ... ]".
         Regex("\\{\\s*([^}]*)\\s*}")
     }.getOrElse {
         // Fallback: never match, so templates are rendered as-is instead of crashing the app.
