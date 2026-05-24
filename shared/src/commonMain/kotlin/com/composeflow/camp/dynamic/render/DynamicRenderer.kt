@@ -110,14 +110,29 @@ fun DynamicNodeRenderer(
             }
         }
 
-        is DynamicNode.Text -> Text(
-            text = resolver.renderTemplate(node.text, data),
-            modifier = modifier.applyStyle(style),
-            color = style?.textColor?.toComposeColor() ?: Color.Unspecified,
-            fontSize = style?.fontSize?.sp ?: androidx.compose.ui.unit.TextUnit.Unspecified,
-            fontWeight = style.toComposeFontWeight(),
-            textAlign = style.toComposeTextAlign(),
-        )
+//        is DynamicNode.Text -> Text(
+//            text = resolver.renderTemplate(node.text, data),
+//            modifier = modifier.applyStyle(style),
+//            color = style?.textColor?.toComposeColor() ?: Color.Unspecified,
+//            fontSize = style?.fontSize?.sp ?: androidx.compose.ui.unit.TextUnit.Unspecified,
+//            fontWeight = style.toComposeFontWeight(),
+//            textAlign = style.toComposeTextAlign(),
+//        )
+
+        is DynamicNode.Text -> {
+            val raw = node.text
+            val rendered = resolver.renderTemplate(raw, data)
+            android.util.Log.d("DynamicText", "raw=$raw -> rendered=$rendered")
+
+            Text(
+                text = rendered,
+                modifier = modifier.applyStyle(style),
+                color = style?.textColor?.toComposeColor() ?: Color.Unspecified,
+                fontSize = style?.fontSize?.sp ?: androidx.compose.ui.unit.TextUnit.Unspecified,
+                fontWeight = style.toComposeFontWeight(),
+                textAlign = style.toComposeTextAlign(),
+            )
+        }
 
         is DynamicNode.Image -> DynamicImagePlaceholder(
             url = resolver.renderTemplate(node.url, data),
