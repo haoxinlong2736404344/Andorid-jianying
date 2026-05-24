@@ -11,7 +11,20 @@ import kotlinx.serialization.json.doubleOrNull
 import kotlinx.serialization.json.put
 
 class BindingResolver {
-    private val bindingPattern = Regex("\\{\\s*([^}]+?)\\s*}")
+    /**
+     * Match template bindings like: "Hello { user.name }".
+     *
+     * Notes:
+     * - Prefer a conservative pattern for Android ICU regex compatibility.
+     * - Avoid reluctant quantifiers (e.g. +?) which have been observed to crash on some devices
+     *   with PatternSyntaxException during Pattern compilation.
+     */
+    private val bindingPattern: Regex = runCatching {
+        Regex("\\{\\s*([^}]*)\\s*}")
+    }.getOrElse {
+        // Fallback: never match, so templates are rendered as-is instead of crashing the app.
+        Regex("a\\b")
+    }
 
     fun renderTemplate(template: String, data: JsonObject): String {
         return bindingPattern.replace(template) { match ->
