@@ -1,12 +1,9 @@
 # AI Coding 使用记录
 
-| 标题 | 内容 |
-| --- | --- |
-| 任务 | 根据训练营文档生成 KMP 动态化 UI 方案、Android Demo、代码、DSL 样例和说明文档 |
-| AI 工具 | Codex |
-| 提示意图 | 读取 Word 文档，提炼交付要求，并持续补齐到训练营要求全部满足 |
-| 采纳内容 | Parser、IR、表达式绑定、事件模型、Renderer、Android Demo、样例配置、README、DSL 文档、设计文档、验证记录 |
-| 拒绝内容 | 未生成远端配置平台、完整发布系统、复杂动画和真实图片加载，避免超出训练营周期和可解释范围 |
-| 人工修改 | 后续真实业务接入时需要开发者补 Android/iOS 图片加载、真实跳转、真实埋点 SDK 和线上灰度策略 |
-| 验证方式 | 使用 `tools/validate_samples.py` 验证合法/错误 DSL；解析 JSON/XML；如 Gradle 可用，执行 `:shared:jvmTest` 和 `:androidApp:installDebug` |
-| 剩余风险 | 当前环境缺少 Gradle/Android SDK 验证能力；真实端侧运行需要在 Android Studio 或具备 Android SDK 的机器上完成 |
+| 任务 | AI 工具 | 提示意图 | 采纳内容 | 拒绝内容 | 人工修改 | 验证方式 | 剩余风险 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| DSL 字段与边界设计（选题一） | Codex | 先满足训练营 P0，再补 P1 可选能力 | 页面树、基础组件、样式、事件、数据绑定字段 | 一次性引入复杂脚本表达式 | 收敛为受控表达式（变量/比较/三元）并补边界文档 | 人工审阅 DSL 样例 + Parser 错误样例 | 远端配置平台能力未纳入本期 |
+| Parser 与 IR 建模 | Codex | 从 JSON 转类型安全模型并输出可定位错误 | `DynamicPage` / `DynamicNode` / `UiStyle`、`ParseResult` 与错误路径 | 弱类型 `Map<String, Any>` 透传方案 | 改为强类型节点 + 枚举校验 + 非法颜色校验 | `tools/validate_samples.py`、`DynamicDslParserTest` | DSL 版本升级仍需迁移策略 |
+| Renderer 与动态图片能力 | Codex | 映射 IR 到 Compose 并保证动态能力可扩展 | Column/Row/Box/Text/Image/Button/ForEach/StateLayout 渲染骨架 | 直接在 shared 层耦合平台 API | 抽出 `PlatformDynamicImage` expect/actual；Android 支持 `asset://` 与网络 URL，其他平台保留占位 | Android Demo 手动切换样例验证 + 代码 Review | iOS 端图片仍为占位，需要后续 actual 实现 |
+| Demo 与样例组织 | Codex | 提供可答辩演示链路（成功+失败） | `retention_dialog` 主样例 + 扩展样例 + invalid 样例切换 | 仅保留单一样例 | 增加错误面板、样例分组、主场景优先展示 | Android Demo 手动演示：成功渲染/错误提示/事件反馈 | 真机兼容性需在完整设备矩阵回归 |
+| 测试与验证补强 | Codex | 增加选题一专属证据 | retention_dialog 解析与按钮事件断言、绑定表达式测试 | 仅保留通用 smoke test | 新增关键断言并补缺失绑定策略（缺失路径输出空串） | `DynamicDslParserTest`、`BindingResolverTest`、`tools/validate_samples.py` | Gradle 依赖解析受网络环境影响可能失败 |

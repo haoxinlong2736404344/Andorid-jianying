@@ -46,7 +46,11 @@
 
 ### Image
 
-图片组件，`url` 必填。当前代码提供跨平台占位渲染，真实图片加载留给平台资源层。
+图片组件，`url` 必填。Android 端已支持最小可用真实渲染：
+
+- `asset://xxx`：按 `drawable` 资源名加载。
+- `http/https/file/content`：按网络或本地 URI 加载。
+- 其他协议回退为占位文本。
 
 ```json
 {
@@ -163,6 +167,11 @@
 - 布尔读取：`{ user.isVip }`
 - 比较：`{ benefits.count == 0 }`、`{ plan.type != 'trial' }`
 - 简单三元：`{ user.isVip ? 'VIP' : 'Guest' }`
+
+缺失绑定路径策略：
+
+- 文本模板渲染时，缺失路径输出空字符串（例如 `{ user.nickname }` 不存在时输出 `""`）。
+- 布尔表达式中，缺失路径按 `false` 处理。
 
 ## 事件
 

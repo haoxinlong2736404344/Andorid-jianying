@@ -1,5 +1,10 @@
 # 完成报告
 
+## 主场景定位
+
+本次训练营主场景为：**选题一「剪映订阅挽留弹窗」**（`retention_dialog`）。  
+`subscription_page`、`benefits_empty`、`benefits_list` 用于验证方案可扩展性，不替代主交付场景。
+
 ## 交付结论
 
 当前工程已经覆盖训练营文档要求的核心交付物：
@@ -8,6 +13,7 @@
 - KMP shared 层。
 - Compose Multiplatform Renderer。
 - Android Demo 端。
+- Android 端最小可用真实图片渲染能力（`asset://` + 网络 URL）。
 - DSL 说明。
 - 设计说明。
 - 4 个合法样例。
@@ -39,4 +45,5 @@
 
 ## 环境说明
 
-当前工作区没有 Gradle Wrapper，且本轮环境无法确认系统 Gradle / Android SDK 状态。因此我完成了工程与代码生成，并运行了不依赖联网的样例校验。实际 Android 编译需要在具备 Android SDK 和 Gradle 的机器上执行。
+仓库已提供 Gradle Wrapper（`./gradlew`）。  
+当前环境可能受网络或插件仓库可用性影响，导致 Gradle 依赖解析失败；样例校验脚本可在离线场景下执行。

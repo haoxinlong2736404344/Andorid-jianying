@@ -1,7 +1,11 @@
 package com.composeflow.camp.dynamic.parser
 
+import com.composeflow.camp.dynamic.demo.DemoSamples
+import com.composeflow.camp.dynamic.model.DynamicNode
+import com.composeflow.camp.dynamic.model.EventType
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class DynamicDslParserTest {
@@ -71,5 +75,28 @@ class DynamicDslParserTest {
         )
 
         assertTrue(result is ParseResult.Success)
+    }
+
+    @Test
+    fun parseRetentionDialogAndVerifyActions() {
+        val raw = DemoSamples.validSamples.getValue("retention_dialog")
+        val result = parser.parse(raw)
+        assertTrue(result is ParseResult.Success)
+
+        val rootChildren = (result.value.root as DynamicNode.Box).children
+        val dialogColumn = rootChildren.first() as DynamicNode.Column
+        val nodes = dialogColumn.children
+        val title = nodes[1] as DynamicNode.Text
+        val primary = nodes[5] as DynamicNode.Button
+        val secondary = nodes[6] as DynamicNode.Button
+
+        assertTrue(title.text.contains("{ user.name }"))
+        assertTrue(primary.text.contains("{ campaign.currentPrice }"))
+        assertEquals(EventType.Track, primary.action?.type)
+        assertEquals("retention_confirm_click", primary.action?.payload?.get("event"))
+        assertEquals(EventType.Toast, secondary.action?.type)
+        assertEquals("Dialog dismissed", secondary.action?.payload?.get("message"))
+        assertNotNull(primary.action)
+        assertNotNull(secondary.action)
     }
 }

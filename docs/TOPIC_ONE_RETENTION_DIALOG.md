@@ -9,7 +9,7 @@
 | 选题要求 | 当前实现 |
 | --- | --- |
 | 弹窗 | `samples/valid/retention_dialog.json` 根节点使用半透明遮罩 `Box` + 白色圆角 `Column` |
-| 背景图 | `Image` 节点 `asset://retention_hero.png`，当前用跨平台占位渲染 |
+| 背景图 | `Image` 节点 `asset://retention_hero.png`，Android 端可真实渲染（其他平台占位） |
 | 会员角标 | Hero 区域中的 `VIP` Badge |
 | 标题 | `{ user.name }, keep your Pro access` |
 | 打折信息 | `{ campaign.currentPrice }`、`{ campaign.originalPrice }`、`Save { campaign.discount }` |

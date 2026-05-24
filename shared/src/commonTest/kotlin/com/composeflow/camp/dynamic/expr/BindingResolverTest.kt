@@ -35,4 +35,10 @@ class BindingResolverTest {
     fun evaluateTernaryExpression() {
         assertEquals("VIP", resolver.evaluateAsString("{ user.isVip ? 'VIP' : 'Guest' }", data))
     }
+
+    @Test
+    fun renderMissingBindingAsEmptyString() {
+        assertEquals("Hello ", resolver.renderTemplate("Hello { user.nickname }", data))
+        assertEquals("fallback", resolver.evaluateAsString("'fallback'", data))
+    }
 }
