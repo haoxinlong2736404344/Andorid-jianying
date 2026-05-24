@@ -55,7 +55,7 @@ class BindingResolver {
             }
         } else {
             resolvePath(trimmed, data)?.jsonPrimitiveOrNull()?.contentOrNull
-                ?: trimmed.trim('\'', '"')
+                ?: if (trimmed.isQuotedLiteral()) trimmed.trim('\'', '"') else null
         }
     }
 
@@ -103,4 +103,9 @@ class BindingResolver {
     }
 
     private fun JsonElement.jsonPrimitiveOrNull(): JsonPrimitive? = this as? JsonPrimitive
+
+    private fun String.isQuotedLiteral(): Boolean {
+        val text = trim()
+        return (text.startsWith("'") && text.endsWith("'")) || (text.startsWith("\"") && text.endsWith("\""))
+    }
 }

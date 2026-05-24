@@ -2,6 +2,10 @@
 
 ## 样例覆盖
 
+主场景：
+
+- `samples/valid/retention_dialog.json`
+
 合法样例：
 
 - `samples/valid/retention_dialog.json`
@@ -41,10 +45,10 @@ OK   samples/invalid/unknown_component.json
 
 ## Kotlin 单测
 
-如果本机 Gradle 环境可用：
+默认使用仓库内 Gradle Wrapper：
 
 ```bash
-gradle :shared:jvmTest
+bash ./gradlew :shared:jvmTest
 ```
 
 覆盖点：
@@ -60,7 +64,7 @@ gradle :shared:jvmTest
 如果本机 Android 环境可用：
 
 ```bash
-gradle :androidApp:installDebug
+bash ./gradlew :androidApp:installDebug
 ```
 
 人工检查：
@@ -71,8 +75,15 @@ gradle :androidApp:installDebug
 4. 切换 `Invalid`，确认错误面板展示具体 path 和 message。
 5. 查看 `benefits_list`，确认 `ForEach` 渲染多条权益，`styleWhen` 对已领取项生效。
 
+## 选题一专项验证点
+
+- `retention_dialog` 解析成功，且关键节点包含 `VIP` 角标、价格与折扣绑定文案。
+- 主按钮事件为 `Track`，事件名为 `retention_confirm_click`。
+- 次按钮事件为 `Toast`，文案为 `Dialog dismissed`。
+- 缺失绑定路径不再回退字段名字面量，而是渲染为空字符串。
+
 ## 剩余风险
 
-- 当前工作区没有 Gradle Wrapper，离线环境无法实际下载 Gradle/Android 依赖。
-- 图片加载仍是跨平台占位，真实业务接入时需要补 Android/iOS 图片加载实现。
+- 当前环境可能受网络/插件镜像影响，Gradle 依赖解析存在失败风险。
+- iOS 端仍为图片占位渲染，Android 端已支持最小可用真实图片渲染（`asset://` 与网络 URL）。
 - 远端配置拉取、签名校验和灰度策略属于生产化扩展，本次以训练营闭环为主。

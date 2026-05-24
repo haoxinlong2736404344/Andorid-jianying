@@ -178,18 +178,12 @@ private fun DynamicImagePlaceholder(
     style: UiStyle?,
     modifier: Modifier,
 ) {
-    Box(
+    PlatformDynamicImage(
+        url = url,
+        description = description,
         modifier = modifier.applyStyle(style),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = description ?: url,
-            fontSize = 12.sp,
-            color = style?.textColor?.toComposeColor() ?: Color(0xFF666666),
-            fontWeight = style.toComposeFontWeight(),
-            textAlign = TextAlign.Center,
-        )
-    }
+        fallbackText = description ?: url,
+    )
 }
 
 private fun Modifier.applyStyle(style: UiStyle?): Modifier {
