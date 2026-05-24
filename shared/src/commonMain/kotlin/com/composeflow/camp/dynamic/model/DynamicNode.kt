@@ -30,6 +30,19 @@ sealed interface DynamicNode {
         val children: List<DynamicNode> = emptyList(),
     ) : DynamicNode
 
+    /**
+     * A horizontally scrollable container.
+     *
+     * Rendered as a LazyRow on Android.
+     */
+    data class HScroll(
+        override val id: String? = null,
+        override val visible: String? = null,
+        override val style: UiStyle? = null,
+        override val styleWhen: List<ConditionalStyle> = emptyList(),
+        val children: List<DynamicNode> = emptyList(),
+    ) : DynamicNode
+
     data class Text(
         override val id: String? = null,
         override val visible: String? = null,
