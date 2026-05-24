@@ -149,7 +149,7 @@ object DemoSamples {
                     "type": "Row",
                     "style": {
                       "width": 318,
-                      "margin": { "bottom": 18 },
+                      "margin": { "bottom": 16 },
                       "horizontalAlignment": "Center"
                     },
                     "children": [
@@ -161,9 +161,9 @@ object DemoSamples {
                           {
                             "type": "Column",
                             "style": {
-                              "width": 98,
-                              "backgroundColor": "#F5F7FA",
-                              "cornerRadius": 16,
+                              "width": 96,
+                              "backgroundColor": "#FFFFFF",
+                              "cornerRadius": 14,
                               "padding": { "all": 10 },
                               "margin": { "end": 8 },
                               "horizontalAlignment": "Center"
@@ -174,12 +174,12 @@ object DemoSamples {
                                 "url": "asset://benefit_icon.png",
                                 "description": "{ benefit.icon }",
                                 "style": {
-                                  "width": 40,
-                                  "height": 40,
+                                  "width": 34,
+                                  "height": 34,
                                   "backgroundColor": "#111111",
                                   "textColor": "#FFFFFF",
                                   "fontWeight": "Bold",
-                                  "cornerRadius": 20,
+                                  "cornerRadius": 17,
                                   "margin": { "bottom": 8 }
                                 }
                               },
@@ -187,19 +187,20 @@ object DemoSamples {
                                 "type": "Text",
                                 "text": "{ benefit.title }",
                                 "style": {
-                                  "width": 78,
+                                  "width": 76,
                                   "textColor": "#111111",
                                   "fontSize": 12,
                                   "fontWeight": "Bold",
-                                  "textAlign": "Center"
+                                  "textAlign": "Center",
+                                  "margin": { "bottom": 2 }
                                 }
                               },
                               {
                                 "type": "Text",
                                 "text": "{ benefit.subtitle }",
                                 "style": {
-                                  "width": 78,
-                                  "textColor": "#777777",
+                                  "width": 76,
+                                  "textColor": "#8A8A8A",
                                   "fontSize": 10,
                                   "textAlign": "Center"
                                 }
@@ -216,7 +217,7 @@ object DemoSamples {
                     "style": {
                       "width": 318,
                       "height": 50,
-                      "backgroundColor": "#111111",
+                      "backgroundColor": "#FF4D4F",
                       "textColor": "#FFFFFF",
                       "cornerRadius": 25,
                       "fontSize": 16,
@@ -236,11 +237,13 @@ object DemoSamples {
                     "text": "Maybe later",
                     "style": {
                       "width": 318,
-                      "height": 42,
+                      "height": 44,
                       "backgroundColor": "#FFFFFFFF",
-                      "textColor": "#777777",
-                      "cornerRadius": 21,
-                      "fontSize": 14
+                      "textColor": "#666666",
+                      "cornerRadius": 22,
+                      "fontSize": 14,
+                      "borderColor": "#E6E6E6",
+                      "borderWidth": 1
                     },
                     "action": {
                       "type": "Toast",
