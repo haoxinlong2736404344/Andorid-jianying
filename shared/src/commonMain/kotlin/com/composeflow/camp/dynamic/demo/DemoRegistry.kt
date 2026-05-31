@@ -13,17 +13,17 @@ object DemoRegistry {
             {
               "user": { "name": "Andy", "isVip": true },
               "campaign": {
-                "title": "VIP creator pack",
+                "title": "会员专属创作包",
                 "discount": "50%",
-                "originalPrice": "19.99 USD",
-                "currentPrice": "9.99 USD",
+                "originalPrice": "19.99 元",
+                "currentPrice": "9.99 元",
                 "remainingDays": 2
               },
               "retention": {
                 "benefits": [
-                  { "icon": "4K", "title": "HD export", "subtitle": "No watermark" },
-                  { "icon": "BGM", "title": "Music pack", "subtitle": "Commercial use" },
-                  { "icon": "AI", "title": "AI tools", "subtitle": "Smart editing" }
+                  { "icon": "4K", "title": "高清导出", "subtitle": "无水印" },
+                  { "icon": "BGM", "title": "音乐素材", "subtitle": "可商用" },
+                  { "icon": "AI", "title": "AI 工具", "subtitle": "智能剪辑" }
                 ]
               }
             }
@@ -31,7 +31,7 @@ object DemoRegistry {
         "subscription_page" -> """
             {
               "user": { "name": "Andy", "isVip": false },
-              "campaign": { "title": "Summer creator sale", "discount": "40%" },
+              "campaign": { "title": "夏日创作季", "discount": "40%" },
               "paywall": { "selectedPlan": "yearly" }
             }
         """.trimIndent()
@@ -41,9 +41,9 @@ object DemoRegistry {
               "benefits": {
                 "state": "content",
                 "items": [
-                  { "title": "Commercial asset pack", "status": "available", "tag": "New" },
-                  { "title": "HD export quota", "status": "used", "tag": "Used" },
-                  { "title": "Cloud storage boost", "status": "available", "tag": "Limited" }
+                  { "title": "商用素材包", "status": "available", "tag": "新权益" },
+                  { "title": "高清导出额度", "status": "used", "tag": "已领取" },
+                  { "title": "云空间扩容", "status": "available", "tag": "限时" }
                 ]
               }
             }

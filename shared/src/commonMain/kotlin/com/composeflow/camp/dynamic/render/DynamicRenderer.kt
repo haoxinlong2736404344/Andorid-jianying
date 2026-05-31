@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -94,20 +96,45 @@ fun DynamicNodeRenderer(
             }
         }
 
-        is DynamicNode.Text -> Text(
-            text = resolver.renderTemplate(node.text, data),
-            modifier = modifier.applyStyle(style),
-            color = style?.textColor?.toComposeColor() ?: Color.Unspecified,
-            fontSize = style?.fontSize?.sp ?: androidx.compose.ui.unit.TextUnit.Unspecified,
-            fontWeight = style.toComposeFontWeight(),
-            textAlign = style.toComposeTextAlign(),
-        )
+        is DynamicNode.HScroll -> {
+            // Note: we render children as individual items. For most use-cases, HScroll will contain
+            // a single ForEach which will expand into multiple nodes via DynamicNodeRenderer.
+            LazyRow(
+                modifier = modifier.applyStyle(style),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                items(node.children) { child ->
+                    DynamicNodeRenderer(child, data, eventDispatcher, resolver)
+                }
+            }
+        }
 
-        is DynamicNode.Image -> DynamicImagePlaceholder(
+//        is DynamicNode.Text -> Text(
+//            text = resolver.renderTemplate(node.text, data),
+//            modifier = modifier.applyStyle(style),
+//            color = style?.textColor?.toComposeColor() ?: Color.Unspecified,
+//            fontSize = style?.fontSize?.sp ?: androidx.compose.ui.unit.TextUnit.Unspecified,
+//            fontWeight = style.toComposeFontWeight(),
+//            textAlign = style.toComposeTextAlign(),
+//        )
+
+        is DynamicNode.Text -> {
+            Text(
+                text = resolver.renderTemplate(node.text, data),
+                modifier = modifier.applyStyle(style),
+                color = style?.textColor?.toComposeColor() ?: Color.Unspecified,
+                fontSize = style?.fontSize?.sp ?: androidx.compose.ui.unit.TextUnit.Unspecified,
+                fontWeight = style.toComposeFontWeight(),
+                textAlign = style.toComposeTextAlign(),
+            )
+        }
+
+        is DynamicNode.Image -> PlatformDynamicImage(
             url = resolver.renderTemplate(node.url, data),
             description = node.description?.let { resolver.renderTemplate(it, data) },
             style = style,
-            modifier = modifier,
+            modifier = modifier.applyStyle(style),
         )
 
         is DynamicNode.Button -> DynamicButton(
@@ -166,27 +193,6 @@ private fun DynamicButton(
             color = style?.textColor?.toComposeColor() ?: Color.White,
             fontSize = style?.fontSize?.sp ?: 16.sp,
             fontWeight = style.toComposeFontWeight() ?: FontWeight.Bold,
-            textAlign = TextAlign.Center,
-        )
-    }
-}
-
-@Composable
-private fun DynamicImagePlaceholder(
-    url: String,
-    description: String?,
-    style: UiStyle?,
-    modifier: Modifier,
-) {
-    Box(
-        modifier = modifier.applyStyle(style),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = description ?: url,
-            fontSize = 12.sp,
-            color = style?.textColor?.toComposeColor() ?: Color(0xFF666666),
-            fontWeight = style.toComposeFontWeight(),
             textAlign = TextAlign.Center,
         )
     }
