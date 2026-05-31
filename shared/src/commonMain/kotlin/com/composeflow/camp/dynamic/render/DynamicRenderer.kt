@@ -120,12 +120,8 @@ fun DynamicNodeRenderer(
 //        )
 
         is DynamicNode.Text -> {
-            val raw = node.text
-            val rendered = resolver.renderTemplate(raw, data)
-            android.util.Log.d("DynamicText", "raw=$raw -> rendered=$rendered")
-
             Text(
-                text = rendered,
+                text = resolver.renderTemplate(node.text, data),
                 modifier = modifier.applyStyle(style),
                 color = style?.textColor?.toComposeColor() ?: Color.Unspecified,
                 fontSize = style?.fontSize?.sp ?: androidx.compose.ui.unit.TextUnit.Unspecified,
@@ -134,11 +130,11 @@ fun DynamicNodeRenderer(
             )
         }
 
-        is DynamicNode.Image -> DynamicImagePlaceholder(
+        is DynamicNode.Image -> PlatformDynamicImage(
             url = resolver.renderTemplate(node.url, data),
             description = node.description?.let { resolver.renderTemplate(it, data) },
             style = style,
-            modifier = modifier,
+            modifier = modifier.applyStyle(style),
         )
 
         is DynamicNode.Button -> DynamicButton(
@@ -197,27 +193,6 @@ private fun DynamicButton(
             color = style?.textColor?.toComposeColor() ?: Color.White,
             fontSize = style?.fontSize?.sp ?: 16.sp,
             fontWeight = style.toComposeFontWeight() ?: FontWeight.Bold,
-            textAlign = TextAlign.Center,
-        )
-    }
-}
-
-@Composable
-private fun DynamicImagePlaceholder(
-    url: String,
-    description: String?,
-    style: UiStyle?,
-    modifier: Modifier,
-) {
-    Box(
-        modifier = modifier.applyStyle(style),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = description ?: url,
-            fontSize = 12.sp,
-            color = style?.textColor?.toComposeColor() ?: Color(0xFF666666),
-            fontWeight = style.toComposeFontWeight(),
             textAlign = TextAlign.Center,
         )
     }

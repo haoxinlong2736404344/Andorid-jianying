@@ -73,7 +73,7 @@ object DemoSamples {
                   },
                   {
                     "type": "Text",
-                    "text": "{ user.name }, keep your Pro access",
+                    "text": "{ user.name }，保留你的 Pro 权益",
                     "style": {
                       "width": 318,
                       "textColor": "#111111",
@@ -85,7 +85,7 @@ object DemoSamples {
                   },
                   {
                     "type": "Text",
-                    "text": "Renew in { campaign.remainingDays } days to lock { campaign.discount } off.",
+                    "text": "剩余 { campaign.remainingDays } 天，立即续费可锁定 { campaign.discount } 优惠",
                     "style": {
                       "width": 300,
                       "textColor": "#606060",
@@ -98,48 +98,48 @@ object DemoSamples {
                     "type": "Row",
                     "style": {
                       "width": 318,
-                      "height": 82,
+                      "height": 96,
                       "backgroundColor": "#FFF7EA",
                       "borderColor": "#FFE3A3",
                       "borderWidth": 1,
                       "cornerRadius": 18,
-                      "padding": { "horizontal": 14, "vertical": 10 },
+                      "padding": { "horizontal": 12, "vertical": 12 },
                       "margin": { "bottom": 16 },
                       "verticalAlignment": "Center"
                     },
                     "children": [
                       {
                         "type": "Column",
-                        "style": { "width": 160 },
+                        "style": { "width": 150 },
                         "children": [
                           {
                             "type": "Text",
-                            "text": "Limited offer",
+                            "text": "限时优惠",
                             "style": { "textColor": "#6B4B00", "fontSize": 13, "fontWeight": "Medium" }
                           },
                           {
                             "type": "Text",
                             "text": "{ campaign.currentPrice }",
-                            "style": { "textColor": "#111111", "fontSize": 26, "fontWeight": "Bold" }
+                            "style": { "textColor": "#111111", "fontSize": 24, "fontWeight": "Bold" }
                           }
                         ]
                       },
                       {
                         "type": "Column",
                         "style": {
-                          "width": 118,
+                          "width": 136,
                           "horizontalAlignment": "End"
                         },
                         "children": [
                           {
                             "type": "Text",
-                            "text": "Was { campaign.originalPrice }",
-                            "style": { "textColor": "#8A8A8A", "fontSize": 12, "textAlign": "End" }
+                            "text": "原价 { campaign.originalPrice }",
+                            "style": { "textColor": "#8A8A8A", "fontSize": 11, "textAlign": "End" }
                           },
                           {
                             "type": "Text",
-                            "text": "Save { campaign.discount }",
-                            "style": { "textColor": "#E0442E", "fontSize": 15, "fontWeight": "Bold", "textAlign": "End" }
+                            "text": "立省 { campaign.discount }",
+                            "style": { "textColor": "#E0442E", "fontSize": 14, "fontWeight": "Bold", "textAlign": "End" }
                           }
                         ]
                       }
@@ -160,11 +160,11 @@ object DemoSamples {
                           {
                             "type": "Column",
                             "style": {
-                              "width": 96,
+                              "width": 92,
                               "backgroundColor": "#FFFFFF",
                               "cornerRadius": 14,
                               "padding": { "all": 10 },
-                              "margin": { "end": 8 },
+                              "margin": { "end": 6 },
                               "horizontalAlignment": "Center"
                             },
                             "children": [
@@ -186,7 +186,7 @@ object DemoSamples {
                                 "type": "Text",
                                 "text": "{ benefit.title }",
                                 "style": {
-                                  "width": 76,
+                                  "width": 72,
                                   "textColor": "#111111",
                                   "fontSize": 12,
                                   "fontWeight": "Bold",
@@ -198,7 +198,7 @@ object DemoSamples {
                                 "type": "Text",
                                 "text": "{ benefit.subtitle }",
                                 "style": {
-                                  "width": 76,
+                                  "width": 72,
                                   "textColor": "#8A8A8A",
                                   "fontSize": 10,
                                   "textAlign": "Center"
@@ -212,7 +212,7 @@ object DemoSamples {
                   },
                   {
                     "type": "Button",
-                    "text": "Keep Pro - { campaign.currentPrice }",
+                    "text": "立即保留 Pro - { campaign.currentPrice }",
                     "style": {
                       "width": 318,
                       "height": 50,
@@ -233,7 +233,7 @@ object DemoSamples {
                   },
                   {
                     "type": "Button",
-                    "text": "Maybe later",
+                    "text": "暂时不用",
                     "style": {
                       "width": 318,
                       "height": 44,
@@ -246,7 +246,7 @@ object DemoSamples {
                     },
                     "action": {
                       "type": "Toast",
-                      "payload": { "message": "Dialog dismissed" }
+                      "payload": { "message": "已关闭挽留弹窗" }
                     }
                   }
                 ]

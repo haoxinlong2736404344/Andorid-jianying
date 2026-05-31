@@ -11,27 +11,30 @@ import kotlinx.serialization.json.doubleOrNull
 import kotlinx.serialization.json.put
 
 class BindingResolver {
-    /**
-     * Match template bindings like: "Hello { user.name }".
-     *
-     * Notes:
-     * - Prefer a conservative pattern for Android ICU regex compatibility.
-     * - Avoid reluctant quantifiers (e.g. +?) which have been observed to crash on some devices
-     *   with PatternSyntaxException during Pattern compilation.
-     */
-    private val bindingPattern: Regex = runCatching {
-        // Strictly match { ... } bindings, and DO NOT match "[ ... ]".
-        Regex("\\{\\s*([^}]*)\\s*}")
-    }.getOrElse {
-        // Fallback: never match, so templates are rendered as-is instead of crashing the app.
-        Regex("a\\b")
-    }
-
     fun renderTemplate(template: String, data: JsonObject): String {
-        return bindingPattern.replace(template) { match ->
-            val expression = match.groupValues[1].trim()
-            evaluateAsString(expression, data) ?: ""
+        if ('{' !in template || '}' !in template) return template
+
+        val output = StringBuilder()
+        var cursor = 0
+        while (cursor < template.length) {
+            val open = template.indexOf('{', startIndex = cursor)
+            if (open < 0) {
+                output.append(template.substring(cursor))
+                break
+            }
+
+            val close = template.indexOf('}', startIndex = open + 1)
+            if (close < 0) {
+                output.append(template.substring(cursor))
+                break
+            }
+
+            output.append(template.substring(cursor, open))
+            val expression = template.substring(open + 1, close).trim()
+            output.append(evaluateAsString(expression, data).orEmpty())
+            cursor = close + 1
         }
+        return output.toString()
     }
 
     fun evaluateAsBoolean(expression: String?, data: JsonObject): Boolean {

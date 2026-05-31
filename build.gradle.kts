@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("multiplatform") version "2.0.21" apply false
     kotlin("android") version "2.0.21" apply false
@@ -8,8 +11,10 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose") version "2.0.21" apply false
 }
 
-allprojects {
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+subprojects {
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
 }
